@@ -57,14 +57,18 @@ const PAGE_LIMIT = 9;
 export const fetchTimeline = async ({
 	client,
 	params,
+	pageLimit,
 }: {
 	client: Client;
 	params: TimelineParams;
+	pageLimit: number;
 }): Promise<TimelinePage> => {
 	let sliceFilter: SliceFilter | undefined;
 	let postFilter: PostFilter | undefined;
 
 	let timeline: AppBskyFeedGetTimeline.$output;
+
+	const limit = pageLimit || PAGE_LIMIT;
 
 	switch (params.type) {
 		case TimelineType.PROFILE: {
@@ -73,7 +77,7 @@ export const fetchTimeline = async ({
 					params: {
 						actor: params.actor,
 						cursor: params.cursor,
-						limit: PAGE_LIMIT,
+						limit: limit,
 						includePins: params.pinned ?? params.filter !== ProfileFilter.MEDIA,
 						filter:
 							params.filter === ProfileFilter.MEDIA
@@ -99,7 +103,7 @@ export const fetchTimeline = async ({
 					params: {
 						feed: params.feed,
 						cursor: params.cursor,
-						limit: PAGE_LIMIT,
+						limit: limit,
 					},
 				}),
 			);
@@ -119,7 +123,7 @@ export const fetchTimeline = async ({
 					params: {
 						list: params.list,
 						cursor: params.cursor,
-						limit: PAGE_LIMIT,
+						limit: limit,
 					},
 				}),
 			);

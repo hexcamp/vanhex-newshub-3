@@ -12,13 +12,69 @@
 	import PostFeedItemNoImage from '$lib/components/timeline/post-feed-item-no-image.svelte';
 	import PostFeedItemWithImage from '$lib/components/timeline/post-feed-item-with-image.svelte';
 
-	import FeedMetaTags from './components/feed-meta-tags.svelte';
+	import FeedMetaTags from '../components/feed-meta-tags.svelte';
 
 	const { data }: PageProps = $props();
 
 	let dedupe = $state(true);
 
 	const rkey = $derived(assertCanonicalResourceUri(data.feed.uri).rkey);
+
+	const regexes = [
+		[/\bcanucks\b/, 'sports'],
+		[/\bwhitecaps\b/, 'sports'],
+		[/\bfifa\b/, 'sports'],
+		[/\bnba\b/, 'sports'],
+		[/\bnbaer\b/, 'sports'],
+		[/\bnhl\b/, 'sports'],
+		[/\bsaskatoon mamba\b/, 'sports'],
+		[/\bworld cup\b/, 'sports'],
+		[/\bbaseball\b/, 'sports'],
+		[/\bhockey\b/, 'sports'],
+		[/\bfootball\b/, 'sports'],
+		[/\bsoccer\b/, 'sports'],
+		[/\bswimming\b/, 'sports'],
+		[/\brunning\b/, 'sports'],
+		[/\bmarathon\b/, 'sports'],
+		[/\bcouncil\b/, 'politics'],
+		[/\bpremier\b/, 'politics'],
+		[/\beby\b/, 'politics'],
+		[/\bgovernment\b/, 'politics'],
+		[/\brob shaw\b/, 'politics'],
+		[/\bmayor\b/, 'politics'],
+		[/\bmayor's\b/, 'politics'],
+		[/\bcity hall\b/, 'politics'],
+		[/\bforests minister\b/, 'politics'],
+		[/\bconservatives\b/, 'politics'],
+		[/\bndp\b/, 'politics'],
+		[/\bliberals\b/, 'politics'],
+		[/\bgang\b/, 'crime'],
+		[/\bhomicide\b/, 'crime'],
+		[/\binvestigators\b/, 'crime'],
+		[/\brcmp\b/, 'crime'],
+		[/\bvpd\b/, 'crime'],
+		[/\bpolice\b/, 'crime'],
+		[/\bkilling\b/, 'crime'],
+		[/\bsuspicious\b/, 'crime'],
+		[/\bcustody\b/, 'crime'],
+		[/\bsentence\b/, 'crime'],
+		[/\bstabbed\b/, 'crime'],
+		[/\bcrash\b/, 'crime'],
+		[/\bfatal\b/, 'crime'],
+		[/\bnurses\b/, 'health'],
+		[/\bport moody\b/, 'local'],
+		[/\bsurrey\b/, 'local'],
+		[/\brichmond\b/, 'local'],
+		[/\bdelta\b/, 'local'],
+		[/\bnorth vancouver\b/, 'local'],
+		[/\bwest vancouver\b/, 'local'],
+		[/\bwhite rock\b/, 'local'],
+		[/\bladner\b/, 'local'],
+		[/\bcoquitlam\b/, 'local'],
+		[/\bnew westminster\b/, 'local'],
+		[/\bnew west\b/, 'local'],
+		[/\blangley\b/, 'local'],
+	];
 
 	let filteredTimeline = $derived({
 		...data.timeline,
@@ -38,6 +94,26 @@
 				if (external?.title) {
 					seen.add(external?.title);
 				}
+
+				// Categorize
+				let category = 'unknown';
+				let titleText: string = embed?.external?.title || text || '';
+				titleText = titleText.toLowerCase();
+				console.log('Jim titleText', titleText);
+
+				for (const regexPair of regexes) {
+					const [re, cat] = regexPair;
+					if (titleText.match(re)) {
+						console.log('Matched', cat);
+						category = cat;
+						break;
+					}
+				}
+				console.log('Category:', category);
+				if (page.url.pathname !== `/${category}/`) {
+					return false;
+				}
+
 				return true;
 			});
 		})(),

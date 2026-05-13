@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { LayoutProps } from './$types';
+	import { page } from '$app/state';
 
 	import FeedAside from './components/feed-aside.svelte';
 
@@ -20,6 +21,16 @@
 				<a href="https://github.com/hexcamp/vanhex-newshub-3">Source on GitHub</a>
 				- <a href="https://6kg6rqiaaaaa.vanhex.ca/">Other Experiments</a>
 			</div>
+
+			<nav>
+				Sections:
+				<a href="/" aria-current={page.url.pathname === '/'}>Home</a>
+				<a href="/politics" aria-current={page.url.pathname === '/politics/'}>Politics</a>
+				<a href="/crime" aria-current={page.url.pathname === '/crime/'}>Crime</a>
+				<a href="/sports" aria-current={page.url.pathname === '/sports/'}>Sports</a>
+				<a href="/local" aria-current={page.url.pathname === '/local/'}>Local</a>
+				<a href="/health" aria-current={page.url.pathname === '/health/'}>Health</a>
+			</nav>
 			{@render children()}
 		</div>
 	</div>
@@ -76,5 +87,17 @@
 	.header h1 {
 		margin-bottom: 0.5rem;
 		line-height: normal;
+	}
+
+	nav {
+		padding: 10px;
+	}
+
+	nav a[aria-current='true'] {
+		border-bottom: 2px solid;
+	}
+
+	nav a {
+		text-decoration: none;
 	}
 </style>

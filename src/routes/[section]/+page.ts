@@ -6,7 +6,7 @@ import type { PageLoad } from './$types';
 
 import { fetchTimeline, TimelineType } from '$lib/queries/timeline';
 import { makeAtUri } from '$lib/types/at-uri';
-import { actor, rkey } from './config';
+import { actor, rkey } from '../config';
 
 export const load: PageLoad = async ({ url, params, fetch, parent }) => {
 	const client = new Client({ handler: simpleFetchHandler({ service: PUBLIC_APPVIEW_URL }) });
@@ -24,6 +24,7 @@ export const load: PageLoad = async ({ url, params, fetch, parent }) => {
 		did = parentData.feed.creator.did as Did;
 	}
 
+	console.log('Jim1 fetchTimeline section');
 	const timeline = await fetchTimeline({
 		client: client,
 		params: {
@@ -31,7 +32,7 @@ export const load: PageLoad = async ({ url, params, fetch, parent }) => {
 			feed: makeAtUri(did, 'app.bsky.feed.generator', rkey),
 			cursor: url.searchParams.get('cursor') || undefined,
 		},
-		pageLimit: 9,
+		pageLimit: 100,
 	});
 
 	return { timeline };
