@@ -22,11 +22,15 @@
 
 	const regexes = [
 		[/\bcanucks\b/, 'sports'],
+		[/\bgiants\b/, 'sports'],
+		[/\bgoldeneyes\b/, 'sports'],
 		[/\bwhitecaps\b/, 'sports'],
 		[/\bfifa\b/, 'sports'],
 		[/\bnba\b/, 'sports'],
 		[/\bnbaer\b/, 'sports'],
 		[/\bnhl\b/, 'sports'],
+		[/\bpwhl\b/, 'sports'],
+		[/\bwhl\b/, 'sports'],
 		[/\bsaskatoon mamba\b/, 'sports'],
 		[/\bworld cup\b/, 'sports'],
 		[/\bbaseball\b/, 'sports'],
@@ -40,19 +44,9 @@
 		[/\bcycling\b/, 'sports'],
 		[/\bballgame\b/, 'sports'],
 		[/\bsports\b/, 'sports'],
-		[/\bpolitics\b/, 'politics'],
-		[/\bcouncil\b/, 'politics'],
-		[/\bpremier\b/, 'politics'],
-		[/\beby\b/, 'politics'],
-		[/\bgovernment\b/, 'politics'],
-		[/\brob shaw\b/, 'politics'],
-		[/\bmayor\b/, 'politics'],
-		[/\bmayor's\b/, 'politics'],
-		[/\bcity hall\b/, 'politics'],
-		[/\bforests minister\b/, 'politics'],
-		[/\bconservatives\b/, 'politics'],
-		[/\bndp\b/, 'politics'],
-		[/\bliberals\b/, 'politics'],
+		[/\bjudge\b/, 'crime'],
+		[/\bmounties\b/, 'crime'],
+		[/\bmountie\b/, 'crime'],
 		[/\bgang\b/, 'crime'],
 		[/\bhomicide\b/, 'crime'],
 		[/\binvestigators\b/, 'crime'],
@@ -62,7 +56,6 @@
 		[/\bkilling\b/, 'crime'],
 		[/\bsuspicious\b/, 'crime'],
 		[/\bcustody\b/, 'crime'],
-		[/\bsentence\b/, 'crime'],
 		[/\bstabbed\b/, 'crime'],
 		[/\bcrash\b/, 'crime'],
 		[/\bfatal\b/, 'crime'],
@@ -77,6 +70,9 @@
 		[/\bcourt\b/, 'crime'],
 		[/\blawyer\b/, 'crime'],
 		[/\blawyers\b/, 'crime'],
+		[/\bconviction\b/, 'crime'],
+		[/\bsentence\b/, 'crime'],
+		[/\bparole\b/, 'crime'],
 		[/\bbreak-and-enter\b/, 'crime'],
 		[/\bsuspect\b/, 'crime'],
 		[/\bcops\b/, 'crime'],
@@ -84,6 +80,9 @@
 		[/\barrest\b/, 'crime'],
 		[/\barrests\b/, 'crime'],
 		[/\btraffic stop\b/, 'crime'],
+		[/\bmurder\b/, 'crime'],
+		[/\bassault\b/, 'crime'],
+		[/\bfraud\b/, 'crime'],
 		[/\brobbery\b/, 'crime'],
 		[/\brape\b/, 'crime'],
 		[/\briot\b/, 'crime'],
@@ -91,12 +90,37 @@
 		[/\bextortion\b/, 'crime'],
 		[/\bmobster\b/, 'crime'],
 		[/\bmafia\b/, 'crime'],
+		[/\bdiscrimination case\b/, 'crime'],
+		[/\bsettlement\b/, 'crime'],
+		[/\bliability\b/, 'crime'],
+		[/\bliable\b/, 'crime'],
+		[/\babuse\b/, 'crime'],
+		[/\bpolitics\b/, 'politics'],
+		[/\bcouncil\b/, 'politics'],
+		[/\bpremier\b/, 'politics'],
+		[/\beby\b/, 'politics'],
+		[/\bgovernment\b/, 'politics'],
+		[/\brob shaw\b/, 'politics'],
+		[/\bmayor\b/, 'politics'],
+		[/\bmayor's\b/, 'politics'],
+		[/\bcity hall\b/, 'politics'],
+		[/\bforests minister\b/, 'politics'],
+		[/\bconservatives\b/, 'politics'],
+		[/\bconservative\b/, 'politics'],
+		[/\bndp\b/, 'politics'],
+		[/\bliberals\b/, 'politics'],
+		[/\bliberal\b/, 'politics'],
+		[/\btransit\b/, 'politics'],
+		[/\boutlaw\b/, 'politics'],
+		[/\boutlaws\b/, 'politics'],
 		[/\bnurses\b/, 'health'],
 		[/\bnursing\b/, 'health'],
 		[/\bdoctor\b/, 'health'],
 		[/\bdoctors\b/, 'health'],
 		[/\bhospital\b/, 'health'],
 		[/\bcancer\b/, 'health'],
+		[/\bhiv\b/, 'health'],
+		[/\bhealthcare\b/, 'health'],
 		[/\bburnaby\b/, 'local'],
 		[/\bport moody\b/, 'local'],
 		[/\bsurrey\b/, 'local'],
@@ -112,6 +136,14 @@
 		[/\blangley\b/, 'local'],
 		[/\btsawwassen\b/, 'local'],
 		[/\bgastown\b/, 'local'],
+		[/\banmore\b/, 'local'],
+		[/\bbelcarra\b/, 'local'],
+		[/\bgranville island\b/, 'local'],
+		[/\bstrathcona\b/, 'local'],
+		[/\bwest end\b/, 'local'],
+		[/\beast van\b/, 'local'],
+		[/\bsteveston\b/, 'local'],
+		[/\bdowntown\b/, 'local'],
 		[/\bpark\b/, 'local'],
 		[/\bbusiness\b/, 'business'],
 		[/\bweb summit\b/, 'business'],
@@ -136,6 +168,14 @@
 		[/\btariffs\b/, 'business'],
 		[/\bproject\b/, 'business'],
 		[/\bcomputing\b/, 'business'],
+		[/\bcompanies\b/, 'business'],
+		[/\bcompany\b/, 'business'],
+		[/\bcorporation\b/, 'business'],
+		[/\bprofits\b/, 'business'],
+		[/\binflation\b/, 'business'],
+		[/\bwholesale\b/, 'business'],
+		[/\bwholesales\b/, 'business'],
+		[/\bai centres\b/, 'business'],
 	];
 
 	let filteredTimeline = $derived({
@@ -163,12 +203,11 @@
 				let category = 'unknown';
 				let titleText: string = embed?.external?.title || text || '';
 				titleText = titleText.toLowerCase();
-				console.log('Jim titleText', titleText);
+				console.log('Title:', titleText);
 
 				for (const regexPair of regexes) {
 					const [re, cat] = regexPair;
 					if (titleText.match(re)) {
-						console.log('Matched', cat);
 						category = cat;
 						break;
 					}
@@ -176,17 +215,26 @@
 				if (category === 'unknown') {
 					let descriptionText: string = embed?.external?.description || '';
 					descriptionText = descriptionText.toLowerCase();
-					console.log('Jim descriptionText', descriptionText);
+					console.log('Description:', descriptionText);
 					for (const regexPair of regexes) {
 						const [re, cat] = regexPair;
 						if (descriptionText.match(re)) {
-							console.log('Matched', cat);
 							category = cat;
 							break;
 						}
 					}
 				}
-				console.log('Category:', category);
+				if (category === 'unknown') {
+					console.log('Author:', item.post.author.displayName);
+					if (item.post.author.displayName === 'BIV News') {
+						category = 'business';
+					}
+				}
+				if (category === 'unknown') {
+					console.warn('==>', category);
+				} else {
+					console.log('==>', category);
+				}
 				if (page.url.pathname !== `/${category}/`) {
 					return false;
 				}
