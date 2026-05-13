@@ -25,7 +25,9 @@
 		items: (() => {
 			const seen = new Set();
 			return data.timeline.items.filter((item) => {
-				const text = <string>item.post.record?.text;
+				let text = <string>item.post.record?.text;
+				text = text.replace(/\btheprovince.com\S+\b/, '');
+				text = text.replace(/\bvancouversun.com\S+\b/, '');
 				if (dedupe && seen.has(text)) {
 					return false;
 				}

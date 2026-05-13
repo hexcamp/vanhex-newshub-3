@@ -34,7 +34,6 @@
 		[/\bfootball\b/, 'sports'],
 		[/\bsoccer\b/, 'sports'],
 		[/\bswimming\b/, 'sports'],
-		[/\brunning\b/, 'sports'],
 		[/\bmarathon\b/, 'sports'],
 		[/\bolympian\b/, 'sports'],
 		[/\bolympics\b/, 'sports'],
@@ -98,6 +97,7 @@
 		[/\bdoctors\b/, 'health'],
 		[/\bhospital\b/, 'health'],
 		[/\bcancer\b/, 'health'],
+		[/\bburnaby\b/, 'local'],
 		[/\bport moody\b/, 'local'],
 		[/\bsurrey\b/, 'local'],
 		[/\brichmond\b/, 'local'],
@@ -143,7 +143,9 @@
 		items: (() => {
 			const seen = new Set();
 			return data.timeline.items.filter((item) => {
-				const text = <string>item.post.record?.text;
+				let text = <string>item.post.record?.text;
+				text = text.replace(/\btheprovince.com\S+\b/, '');
+				text = text.replace(/\bvancouversun.com\S+\b/, '');
 				if (dedupe && seen.has(text)) {
 					return false;
 				}
@@ -169,6 +171,19 @@
 						console.log('Matched', cat);
 						category = cat;
 						break;
+					}
+				}
+				if (category === 'unknown') {
+					let descriptionText: string = embed?.external?.description || '';
+					descriptionText = descriptionText.toLowerCase();
+					console.log('Jim descriptionText', descriptionText);
+					for (const regexPair of regexes) {
+						const [re, cat] = regexPair;
+						if (descriptionText.match(re)) {
+							console.log('Matched', cat);
+							category = cat;
+							break;
+						}
 					}
 				}
 				console.log('Category:', category);
