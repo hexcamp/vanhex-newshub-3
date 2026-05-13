@@ -24,7 +24,6 @@ export const load: PageLoad = async ({ url, params, fetch, parent }) => {
 		did = parentData.feed.creator.did as Did;
 	}
 
-	console.log('Jim1 fetchTimeline section');
 	const timeline = await fetchTimeline({
 		client: client,
 		params: {

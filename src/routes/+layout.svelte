@@ -30,6 +30,7 @@
 				<a href="/sports" aria-current={page.url.pathname === '/sports/'}>Sports</a>
 				<a href="/local" aria-current={page.url.pathname === '/local/'}>Local</a>
 				<a href="/health" aria-current={page.url.pathname === '/health/'}>Health</a>
+				<a href="/business" aria-current={page.url.pathname === '/business/'}>Business</a>
 			</nav>
 			{@render children()}
 		</div>

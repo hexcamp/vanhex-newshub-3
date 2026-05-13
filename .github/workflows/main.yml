@@ -42,7 +42,7 @@ jobs:
       - name: copy index.html to routes
         run: |
           cd site/6kg6rwiaaaaa-vanhex-newshub-3
-          for d in politics crime sports local health; do
+          for d in politics crime sports local health business; do
             mkdir -p $d; cp index.html $d
           done
 
