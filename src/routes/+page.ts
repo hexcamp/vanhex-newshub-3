@@ -31,7 +31,7 @@ export const load: PageLoad = async ({ url, params, fetch, parent }) => {
 			feed: makeAtUri(did, 'app.bsky.feed.generator', rkey),
 			cursor: url.searchParams.get('cursor') || undefined,
 		},
-		pageLimit: 9,
+		pageLimit: 20,
 	});
 
 	return { timeline };

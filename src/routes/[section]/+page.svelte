@@ -87,6 +87,7 @@
 		[/\brape\b/, 'crime'],
 		[/\briot\b/, 'crime'],
 		[/\btheft\b/, 'crime'],
+		[/\bsuicide\b/, 'crime'],
 		[/\bextortion\b/, 'crime'],
 		[/\bmobster\b/, 'crime'],
 		[/\bmafia\b/, 'crime'],
@@ -316,6 +317,13 @@
 				</div>
 			</div>
 		</div>
+	</section>
+	<section class="flexbox-section">
+		{#each { length: filteredTimeline.items.length - 8 } as _, i}
+			<div>
+				<PostFeedItemWithImage item={filteredTimeline.items[i + 8]} />
+			</div>
+		{/each}
 	</section>
 </PageListing>
 
@@ -851,6 +859,22 @@
 	@media screen and (max-width: 599px) {
 		.subgrid1-3-4 {
 			grid-row: 8 / span 1;
+		}
+	}
+
+	.flexbox-section {
+		display: flex;
+		flex-wrap: wrap;
+		max-width: 1279px;
+	}
+
+	.flexbox-section div {
+		max-width: 300px;
+	}
+
+	@media screen and (max-width: 599px) {
+		.flexbox-section div {
+			max-width: 599px;
 		}
 	}
 </style>
