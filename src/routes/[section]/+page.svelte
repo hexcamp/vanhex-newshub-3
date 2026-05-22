@@ -874,7 +874,7 @@
 
 	@media screen and (max-width: 599px) {
 		.flexbox-section div {
-			max-width: 599px;
+			max-width: 100%;
 		}
 	}
 </style>
